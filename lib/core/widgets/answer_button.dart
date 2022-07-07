@@ -16,10 +16,10 @@ class AnswerButton extends StatelessWidget {
         maximumSize: const Size(275, 50),
       ),
       onPressed: () {
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const ResultPage(),
+              builder: (context) => ResultPage(dogruSayisi: 2),
             ));
       },
       child: Row(
