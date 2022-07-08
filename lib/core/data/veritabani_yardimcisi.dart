@@ -11,7 +11,7 @@ class VeriTabaniYardimcisi {
     String veriTabaniYolu = join(await getDatabasesPath(), veriTabaniAdi);
 
     if (await databaseExists(veriTabaniYolu)) {
-      print("Veri Tabani Cihaza Kopyalanmis Zaten");
+      //print("Veri Tabani Cihaza Kopyalanmis Zaten");
     } else {
       ByteData data = await rootBundle.load("database/$veriTabaniAdi");
 

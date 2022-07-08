@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_flag_question_app/core/views/result_page.dart';
 
 class AnswerButton extends StatelessWidget {
   final String ulkeAdi;
-  const AnswerButton({required this.ulkeAdi, Key? key}) : super(key: key);
+  Function dogruKontrol;
+  Function soruSayacKontrol;
+  AnswerButton(
+      {required this.ulkeAdi,
+      required this.dogruKontrol,
+      required this.soruSayacKontrol,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +22,8 @@ class AnswerButton extends StatelessWidget {
         maximumSize: const Size(275, 50),
       ),
       onPressed: () {
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ResultPage(dogruSayisi: 2),
-            ));
+        dogruKontrol;
+        soruSayacKontrol;
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
