@@ -14,13 +14,6 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  @override
-  void initState() {
-    sorulariAl();
-    soruYukle();
-    super.initState();
-  }
-
   List<Flags> sorular = <Flags>[];
   List<Flags> yanlisSecenekler = <Flags>[];
   late Flags dogruSoru;
@@ -36,11 +29,15 @@ class _QuizPageState extends State<QuizPage> {
   String buttonCyazi = "";
   String buttonDyazi = "";
 
+  Future<void> sorulariAl() async {
+    sorular = await BayraklarDao().rastgeleBesGetir();
+
+    soruYukle();
+  }
+
   Future<void> soruYukle() async {
     dogruSoru = sorular[soruSayac];
-
     bayrakResimAdi = dogruSoru.flagImage;
-
     yanlisSecenekler =
         await BayraklarDao().rastgeleUcYanlisGetir(dogruSoru.flagId);
 
@@ -58,12 +55,7 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {});
   }
 
-  Future<void> sorulariAl() async {
-    sorular = await BayraklarDao().rastgeleBesGetir();
-    soruYukle();
-  }
-
-  soruSayacKontrol() {
+  void soruSayacKontrol() {
     soruSayac++;
 
     if (soruSayac != 5) {
@@ -77,12 +69,18 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  dogruKontol(String buttonYazi) {
+  void dogruKontol(String buttonYazi) {
     if (dogruSoru.flagName == buttonYazi) {
       dogruSayac++;
     } else {
       yanlisSayac++;
     }
+  }
+
+  @override
+  void initState() {
+    sorulariAl();
+    super.initState();
   }
 
   @override
@@ -99,36 +97,81 @@ class _QuizPageState extends State<QuizPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  "Dogru : $dogruSayac",
+                  "$dogruSayac : Dogru",
                   style: const TextStyle(fontSize: 18),
                 ),
                 Text(
-                  "Yanlis : $yanlisSayac",
+                  "$yanlisSayac Yanlis",
                   style: const TextStyle(fontSize: 18),
                 ),
               ],
             ),
-            soruSayac != 5
-                ? Text("${soruSayac + 1}.Soru",
-                    style: const TextStyle(fontSize: 30))
-                : const Text("5.Soru", style: TextStyle(fontSize: 30)),
+            Text("${soruSayac + 1}.Soru", style: const TextStyle(fontSize: 30)),
             Image.asset("assets/images/$bayrakResimAdi"),
-            AnswerButton(
-                ulkeAdi: buttonAyazi,
-                dogruKontrol: dogruKontol(buttonAyazi),
-                soruSayacKontrol: soruSayacKontrol()),
-            AnswerButton(
-                ulkeAdi: buttonByazi,
-                dogruKontrol: dogruKontol(buttonByazi),
-                soruSayacKontrol: soruSayacKontrol()),
-            AnswerButton(
-                ulkeAdi: buttonCyazi,
-                dogruKontrol: dogruKontol(buttonCyazi),
-                soruSayacKontrol: soruSayacKontrol()),
-            AnswerButton(
-                ulkeAdi: buttonDyazi,
-                dogruKontrol: dogruKontol(buttonDyazi),
-                soruSayacKontrol: soruSayacKontrol()),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.cyan.shade700,
+                onPrimary: Colors.white,
+                elevation: 5,
+                minimumSize: const Size(275, 50),
+                maximumSize: const Size(275, 50),
+              ),
+              onPressed: () {
+                soruSayacKontrol();
+                dogruKontol(buttonAyazi);
+              },
+              child: Text(
+                buttonAyazi,
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.cyan.shade700,
+                onPrimary: Colors.white,
+                elevation: 5,
+                minimumSize: const Size(275, 50),
+                maximumSize: const Size(275, 50),
+              ),
+              onPressed: () {
+                soruSayacKontrol();
+                dogruKontol(buttonByazi);
+              },
+              child: Text(
+                buttonByazi,
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.cyan.shade700,
+                onPrimary: Colors.white,
+                elevation: 5,
+                minimumSize: const Size(275, 50),
+                maximumSize: const Size(275, 50),
+              ),
+              onPressed: () {
+                soruSayacKontrol();
+                dogruKontol(buttonCyazi);
+              },
+              child: Text(
+                buttonCyazi,
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.cyan.shade700,
+                onPrimary: Colors.white,
+                elevation: 5,
+                minimumSize: const Size(275, 50),
+                maximumSize: const Size(275, 50),
+              ),
+              onPressed: () {
+                soruSayacKontrol();
+                dogruKontol(buttonDyazi);
+              },
+              child: Text(
+                buttonDyazi,
+              ),
+            ),
           ],
         ),
       ),
