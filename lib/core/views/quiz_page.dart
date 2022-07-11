@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_flag_question_app/core/data/bayraklar_dao.dart';
 import 'package:flutter_flag_question_app/core/model/flags.dart';
 import 'package:flutter_flag_question_app/core/views/result_page.dart';
-import 'package:flutter_flag_question_app/core/widgets/answer_button.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({Key? key}) : super(key: key);

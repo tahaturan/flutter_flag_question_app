@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class AnswerButton extends StatelessWidget {
   final String ulkeAdi;
   Function dogruKontrol;
